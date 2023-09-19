@@ -1,9 +1,10 @@
 # chatco
 a two way chat system which uses web sockets for sending and receiving messages and keeping record of who is present in the room
 
-Versions
+#Versions
 Node version: v18.12.0
-Dependencies
+
+#Dependencies
 Nodemon
 moment
 express
