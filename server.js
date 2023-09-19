@@ -23,7 +23,10 @@ socket.emit('message', formatMessage(botName,'Welcome to ChatCo!' ))// single pe
 
 //broadcast when user connects
 socket.broadcast.to(user.room).emit('message',formatMessage(botName, `${user.username} has joined the chat`)) //emit to everpne except the user who is connecting
-
+  io.to(user.room).emit('roomUsers',{
+    room: user.room,
+    users: getRoomUsers(user.room)
+  })
 })
 
 // listen for chat message
@@ -38,6 +41,12 @@ socket.on('disconnect', ()=> {
   if(user){
     io.to(user.room).emit('message', formatMessage(botName, `${user.username} has left the chat`))
   }
+  //send users and room info
+  io.to(user.room).emit('roomUsers',{
+    room: user.room,
+    users: getRoomUsers(user.room)
+  })
+
 })
 
 } )
